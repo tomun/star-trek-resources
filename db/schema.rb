@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127050155) do
+ActiveRecord::Schema.define(version: 20150127063252) do
 
   create_table "crew_members", force: :cascade do |t|
     t.string   "name"
@@ -23,22 +23,33 @@ ActiveRecord::Schema.define(version: 20150127050155) do
   create_table "replications", force: :cascade do |t|
     t.string   "description"
     t.string   "device"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "crew_member_id"
   end
+
+  add_index "replications", ["crew_member_id"], name: "index_replications_on_crew_member_id"
 
   create_table "replicator_credit_transactions", force: :cascade do |t|
     t.integer  "amount"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "crew_member_id"
   end
+
+  add_index "replicator_credit_transactions", ["crew_member_id"], name: "index_replicator_credit_transactions_on_crew_member_id"
 
   create_table "replicator_debit_transactions", force: :cascade do |t|
     t.integer  "amount"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "replication_id"
+    t.integer  "crew_member_id"
   end
+
+  add_index "replicator_debit_transactions", ["crew_member_id"], name: "index_replicator_debit_transactions_on_crew_member_id"
+  add_index "replicator_debit_transactions", ["replication_id"], name: "index_replicator_debit_transactions_on_replication_id"
 
 end
