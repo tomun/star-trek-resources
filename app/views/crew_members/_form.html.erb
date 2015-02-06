@@ -1,0 +1,18 @@
+<%= form_for(@crew_member) do |f| %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :rank %><br>
+    <%= f.text_field :rank %>
+  </div>
+
+  </br/>
+  
+  <div class="actions">
+    <%= f.submit :class => "lcars-button radius", :style => "text-transform:uppercase; font-family:lcars_font" %>
+  </div>
+
+<% end %>

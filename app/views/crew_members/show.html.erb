@@ -1,0 +1,13 @@
+<h2>Replicator</h2>
+
+<p>Crew member name: <%=@crew_member.name %></p>
+<p>Rank: <%=@crew_member.rank %></p>
+
+<%= form_tag(use_replicator_crew_member_path, :method=>'post') do %>
+	<%= hidden_field_tag :id , @crew_member.id %>
+	<div class="actions">
+		<%= submit_tag "use replicator", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
+	</div>
+<% end %>
+
+<%= link_to 'Back', crew_members_path, class:'lcars-button radius' %>

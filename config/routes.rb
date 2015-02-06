@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+
+   resources :crew_members do
+  #   member do
+  #     post 'login'
+  #   end
+    member do
+        post 'use_replicator'
+    end
+   end
+
+  post '/crew_members/login' => 'crew_members#login', :as => 'login_crew_member'
+
+  # post '/crew_members/use_replicator' => 'crew_members#use_replicator', :as => 'use_replicator_crew_member'
+
+  root 'crew_members#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

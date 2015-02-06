@@ -1,4 +1,4 @@
-class ReplicatorDebitTransaction < ActiveRecord::Base #DebitTransaction
+class ReplicatorDebitTransaction < ActiveRecord::Base 
 	belongs_to :replication
-	belongs_to :crew_member # should come from derived?
+	belongs_to :crew_member
 end

@@ -1,3 +1,5 @@
 class CrewMember < ActiveRecord::Base
-	has_many :replication #, :replication_debit_transaction, :replication_credit_transaction
+	has_many :replications
+	has_many :replicator_debit_transactions
+	has_many :replicator_credit_transactions
 end
