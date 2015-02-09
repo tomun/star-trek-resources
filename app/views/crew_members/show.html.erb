@@ -1,9 +1,11 @@
-<h2>Replicator</h2>
+<p class="lcars-tan-color">crew member access</p>
+<br/>
 
-<p>Crew member name: <%=@crew_member.name %></p>
-<p>Rank: <%=@crew_member.rank %></p>
+<p><span class="lcars-blue-color">Name:</span> <%=@crew_member.name %></p>
+<p><span class="lcars-blue-color">Rank:</span> <%=@crew_member.rank %></p>
+<br/>
 
-<h3>recent transactions</h3>
+<p class="lcars-tan-color">recent transactions</p>
 <table>
   <thead>
     <tr>
@@ -11,7 +13,7 @@
       <th class="lcars-blue-color">type</th>
       <th class="lcars-blue-color">amt</th>
       <th class="lcars-blue-color">description</th>
-      <th class="lcars-blue-color"></th>
+      <th class="lcars-blue-color">replicated object</th>
     </tr>
   </thead>
 
@@ -29,26 +31,32 @@
     <% end %>
   </tbody>
 </table>
-<p>balance: <%= @transactions.reduce(0) { |sum, transaction| sum + (transaction.class == ReplicatorDebitTransaction ? -transaction.amount : transaction.amount) } %></p>
+<p><span class="lcars-blue-color">balance:</span> <%= @transactions.reduce(0) { |sum, transaction| sum + (transaction.class == ReplicatorDebitTransaction ? -transaction.amount : transaction.amount) } %></p>
+
+<br/>
 
 <%= form_tag(use_replicator_crew_member_path, :method=>'post') do %>
 	<%= hidden_field_tag :id , @crew_member.id %>
-	<%= label_tag "Describe the object to be replicated" %>
+	<%= label_tag "Describe the object to be replicated", nil, class: "lcars-tan-color" %>
 	<%= text_field_tag :description %>
 	<div class="actions">
 		<%= submit_tag "use replicator", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
 	</div>
 <% end %>
 
+<br/>
+
 <%= form_tag(transfer_to_crew_member_path, :method=>'post') do %>
 	<%= hidden_field_tag :id , @crew_member.id %>
-	<%= label_tag "Transfer credits" %>
+	<%= label_tag "Transfer credits", nil, class: "lcars-tan-color" %>
 	<%= text_field_tag :amount %>
-	<%= label_tag "to crew member id" %>
+	<%= label_tag "to crew member id", nil, class: "lcars-tan-color" %>
 	<%= text_field_tag :to_id %>
 	<div class="actions">
 		<%= submit_tag "transfer", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
 	</div>
 <% end %>
+
+<br/>
 
 <%= link_to 'Back', crew_members_path, class:'lcars-button radius' %>

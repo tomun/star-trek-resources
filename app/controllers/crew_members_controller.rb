@@ -12,11 +12,7 @@ class CrewMembersController < ApplicationController
     debits = ReplicatorDebitTransaction.where crew_member: @crew_member
     credits = ReplicatorCreditTransaction.where crew_member: @crew_member
 
-    puts "debits = #{debits}"
-    puts "credits = #{credits}"
     @transactions =  (debits + credits).sort{|a,b| a.created_at <=> b.created_at }
-    puts "@transactions = #{@transactions}"
-
   end
 
 	# GET /crew_members/new

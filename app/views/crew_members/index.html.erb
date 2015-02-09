@@ -34,9 +34,9 @@
   <tbody>
     <% @crew_members.each do |crew_member| %>
       <tr>
-        <td><%= crew_member.id %></td>
-        <td><%= crew_member.name %></td>
-        <td><%= crew_member.rank %></td>
+        <td><%= link_to crew_member.id, crew_member, style:"color:white" %></td>
+        <td><%= link_to crew_member.name, crew_member, style:"color:white" %></td>
+        <td><%= link_to crew_member.rank, crew_member, style:"color:white" %></td>
        </tr>
     <% end %>
   </tbody>
