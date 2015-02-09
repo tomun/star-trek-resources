@@ -5,6 +5,8 @@
 <p><span class="lcars-blue-color">Rank:</span> <%=@crew_member.rank %></p>
 <br/>
 
+<% if @transactions.count > 0 %>
+
 <p class="lcars-tan-color">recent transactions</p>
 <table>
   <thead>
@@ -31,6 +33,9 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
+
 <p><span class="lcars-blue-color">balance:</span> <%= @transactions.reduce(0) { |sum, transaction| sum + (transaction.class == ReplicatorDebitTransaction ? -transaction.amount : transaction.amount) } %></p>
 
 <br/>

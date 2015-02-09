@@ -2,7 +2,7 @@
 <%= form_tag(login_crew_member_path, :method=>'post') do %>
 
   <div class="field">
-    <%= label_tag 'login_label', "Login by Crew Member ID" %><br>
+    <%= label_tag 'login_label', "Login by Crew Member ID", class: "lcars-tan-color" %><br>
     <%= text_field_tag 'id' %>
   </div>
 
@@ -16,7 +16,9 @@
 
 </br>
 
-<p>Crew Members</p>
+<% if @crew_members.count > 0 %>
+
+<p class="lcars-tan-color">Crew Members</p>
 <br/>
 
 <table style="width: 100%">
@@ -25,9 +27,9 @@
   <col style="width:85%">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>NAME</th>
-      <th>RANK</th>
+      <th class="lcars-blue-color">id</th>
+      <th class="lcars-blue-color">name</th>
+      <th class="lcars-blue-color">rank</th>
     </tr>
   </thead>
 
@@ -41,6 +43,9 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
+
 <br/>
 
 <%= link_to 'New Crew Member', new_crew_member_path, class:'lcars-button radius' %>

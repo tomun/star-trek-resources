@@ -4,7 +4,6 @@ class CrewMembersController < ApplicationController
 	# GET /crew_members
 	def index
 		@crew_members = CrewMember.all
-		@login = ""
 	end
 
   # GET /crew_members/1
@@ -12,7 +11,7 @@ class CrewMembersController < ApplicationController
     debits = ReplicatorDebitTransaction.where crew_member: @crew_member
     credits = ReplicatorCreditTransaction.where crew_member: @crew_member
 
-    @transactions =  (debits + credits).sort{|a,b| a.created_at <=> b.created_at }
+    @transactions =  (debits + credits).sort {|a,b| a.created_at <=> b.created_at }.reverse.take 10
   end
 
 	# GET /crew_members/new
