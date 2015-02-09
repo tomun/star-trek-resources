@@ -1,0 +1,51 @@
+
+<%= form_tag(login_crew_member_path, :method=>'post') do %>
+
+  <div class="field">
+    <%= label_tag 'login_label', "Login by Crew Member ID", class: "lcars-tan-color" %><br>
+    <%= text_field_tag 'id' %>
+  </div>
+
+  <br/>
+
+  <div class="actions">
+    <%= submit_tag "login", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
+  </div>
+
+<% end %>
+
+</br>
+
+<% if @crew_members.count > 0 %>
+
+<p class="lcars-tan-color">Crew Members</p>
+<br/>
+
+<table style="width: 100%">
+  <col style="width:5%">
+  <col style="width:15%">
+  <col style="width:85%">
+  <thead>
+    <tr>
+      <th class="lcars-blue-color">id</th>
+      <th class="lcars-blue-color">name</th>
+      <th class="lcars-blue-color">rank</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crew_members.each do |crew_member| %>
+      <tr>
+        <td><%= link_to crew_member.id, crew_member, style:"color:white" %></td>
+        <td><%= link_to crew_member.name, crew_member, style:"color:white" %></td>
+        <td><%= link_to crew_member.rank, crew_member, style:"color:white" %></td>
+       </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+
+<br/>
+
+<%= link_to 'New Crew Member', new_crew_member_path, class:'lcars-button radius' %>
