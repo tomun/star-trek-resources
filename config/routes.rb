@@ -1,17 +1,13 @@
 Rails.application.routes.draw do
 
    resources :crew_members do
-  #   member do
-  #     post 'login'
-  #   end
-    member do
+      member do
+        post 'transfer_to'
         post 'use_replicator'
-    end
+      end
    end
 
   post '/crew_members/login' => 'crew_members#login', :as => 'login_crew_member'
-
-  # post '/crew_members/use_replicator' => 'crew_members#use_replicator', :as => 'use_replicator_crew_member'
 
   root 'crew_members#index'
 

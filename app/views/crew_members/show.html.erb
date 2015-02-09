@@ -3,10 +3,51 @@
 <p>Crew member name: <%=@crew_member.name %></p>
 <p>Rank: <%=@crew_member.rank %></p>
 
+<h3>recent transactions</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="lcars-blue-color">date</th>
+      <th class="lcars-blue-color">type</th>
+      <th class="lcars-blue-color">amt</th>
+      <th class="lcars-blue-color">description</th>
+      <th class="lcars-blue-color"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.created_at %></td>
+        <td><%= transaction.class == ReplicatorDebitTransaction ? "debit" : "credit"  %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.description %></td>
+        <td><%= if transaction.respond_to?(:replication) 
+        	transaction.replication == nil ? "" : transaction.replication.description 
+        end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>balance: <%= @transactions.reduce(0) { |sum, transaction| sum + (transaction.class == ReplicatorDebitTransaction ? -transaction.amount : transaction.amount) } %></p>
+
 <%= form_tag(use_replicator_crew_member_path, :method=>'post') do %>
 	<%= hidden_field_tag :id , @crew_member.id %>
+	<%= label_tag "Describe the object to be replicated" %>
+	<%= text_field_tag :description %>
 	<div class="actions">
 		<%= submit_tag "use replicator", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
+	</div>
+<% end %>
+
+<%= form_tag(transfer_to_crew_member_path, :method=>'post') do %>
+	<%= hidden_field_tag :id , @crew_member.id %>
+	<%= label_tag "Transfer credits" %>
+	<%= text_field_tag :amount %>
+	<%= label_tag "to crew member id" %>
+	<%= text_field_tag :to_id %>
+	<div class="actions">
+		<%= submit_tag "transfer", class: "lcars-button radius", style: "text-transform:uppercase; font-family:lcars_font" %>
 	</div>
 <% end %>
 

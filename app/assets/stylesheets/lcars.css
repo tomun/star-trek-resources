@@ -243,7 +243,7 @@ ul.lcars-menu li.large-gap {
 .lcars-menu li.tall,
 ol.lcars-menu li.tall,
 ul.lcars-menu li.tall {
-  height: 75px;
+    height: 75px;
 }
 .lcars-menu li a,
 ol.lcars-menu li a,
